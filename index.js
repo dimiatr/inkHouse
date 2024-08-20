@@ -155,46 +155,45 @@ country.forEach(btnCountry => {
     const activeStateBtn = ['bg-firm_hGreen', 'text-white'];
     const btnDefault = country[0];
 
-    btnCountry.id === btnDefault.id ? activeStateBtn.map(className => btnDefault.classList.add(className)) : stateDefaultBtn.map(className => btnCountry.classList.add(className));
+    btnCountry.id === btnDefault.id ? activeStateBtn.forEach(className => btnDefault.classList.add(className)) : stateDefaultBtn.forEach(className => btnCountry.classList.add(className));
 
     if (btnCountry.className.includes('text-white')) {
-        arrFrance.map(el => {
+        arrFrance.forEach(el => {
             createCard(cards, el.img, el.author, el.name, el.description, el.price);
         })
     }
 
     btnCountry.addEventListener('click', (e) => {
         country.forEach(btn => {
-            activeStateBtn.map(className => btn.classList.remove(className));
-            stateDefaultBtn.map(className => btn.classList.add(className));
+            activeStateBtn.forEach(className => btn.classList.remove(className));
+            stateDefaultBtn.forEach(className => btn.classList.add(className));
             if (e.currentTarget) {
-                stateDefaultBtn.map(className => e.currentTarget.classList.remove(className));
-                activeStateBtn.map(className => e.currentTarget.classList.add(className));
+                stateDefaultBtn.forEach(className => e.currentTarget.classList.remove(className));
+                activeStateBtn.forEach(className => e.currentTarget.classList.add(className));
             }
         })
         cards.innerHTML = '';
+        console.log(cards);
+        
         let howCountryBtn = e.currentTarget.id;
         switch (howCountryBtn) {
             case 'fr': {
                 cards.innerHTML = '';
-                cards.scrollIntoView({behavior:'smooth'});
-                arrFrance.map(el => {
+                arrFrance.forEach(el => {
                     createCard(cards, el.img, el.author, el.name, el.description, el.price);
                 })
                 break
             }
             case 'ge': {
                 cards.innerHTML = '';
-                cards.scrollIntoView({behavior:'smooth'});
-                arrGermany.map(el => {
+                arrGermany.forEach(el => {
                     createCard(cards, el.img, el.author, el.name, el.description, el.price);
                 })
                 break
             }
             case 'en': {
                 cards.innerHTML = '';
-                cards.scrollIntoView({behavior:'smooth'});
-                arrEngland.map(el => {
+                arrEngland.forEach(el => {
                     createCard(cards, el.img, el.author, el.name, el.description, el.price);
                 })
                 break
