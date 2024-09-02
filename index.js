@@ -115,42 +115,42 @@ const arrGermany = [
 
 const arrEngland = [
     {
-        img: 'img/England1.png',
+        img: 'img/en1.png',
         author: 'Пол Смит',
         name: 'Дикий зверь',
         description: 'Акварель, бумага (50х80) ',
         price: 19500,
     },
     {
-        img: 'img/England2.png',
+        img: 'img/en2.png',
         author: 'Джон Уайт',
         name: 'Скалистый берег',
         description: 'Цветная литография (40х60) ',
         price: 17500,
     },
     {
-        img: 'img/England3.png',
+        img: 'img/en3.png',
         author: 'Джим Уотсон',
         name: 'Река и горы',
         description: 'Акварель, бумага (50х80) ',
         price: 20500,
     },
     {
-        img: 'img/England4.png',
+        img: 'img/en4.png',
         author: 'Юджин Зиллион',
         name: 'Белый попугай',
         description: 'Цветная литография (40х60) ',
         price: 15500,
     },
     {
-        img: 'img/England5.png',
+        img: 'img/en5.png',
         author: 'Эрик Гиллман',
         name: 'Ночная рыба',
         description: 'Бумага, акрил (50х80) ',
         price: 12500,
     },
     {
-        img: 'img/England6.png',
+        img: 'img/en6.png',
         author: 'Альфред Барр',
         name: 'Рыжий кот',
         description: 'Цветная литография (40х60) ',
