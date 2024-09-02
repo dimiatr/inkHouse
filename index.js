@@ -1,10 +1,27 @@
+// header
+
 const openMenu = document.getElementById('openMenu');
 const closeMenu = document.getElementById('closeMenu');
 const menu = document.getElementById('menu');
+
+
+function toggleMenu(id, menu) {
+    id.addEventListener('click', () => {
+        menu.classList.toggle('hidden');
+    })
+}
+
+toggleMenu(openMenu, menu);
+toggleMenu(closeMenu, menu);
+
+
+// main
+
 const cards = document.getElementById('cards');
-const productsBtn = document.querySelectorAll('.productsBtn');
 const products = document.getElementById('products');
 const country = products.firstElementChild.nextElementSibling.querySelectorAll('*');
+const francePicts = document.getElementById('francePicts');
+
 
 const arrFrance = [
     {
@@ -141,19 +158,11 @@ const arrEngland = [
     },
 ]
 
-function toggleMenu(id, menu) {
-    id.addEventListener('click', () => {
-        menu.classList.toggle('hidden');
-    })
-}
-
-toggleMenu(openMenu, menu);
-toggleMenu(closeMenu, menu);
+const stateDefaultBtn = ['bg-firm_focusGreen', 'text-firm_black'];
+const activeStateBtn = ['bg-firm_hGreen', 'text-white'];
+const btnDefault = country[0];
 
 country.forEach(btnCountry => {
-    const stateDefaultBtn = ['bg-firm_focusGreen', 'text-firm_black'];
-    const activeStateBtn = ['bg-firm_hGreen', 'text-white'];
-    const btnDefault = country[0];
 
     btnCountry.id === btnDefault.id ? activeStateBtn.forEach(className => btnDefault.classList.add(className)) : stateDefaultBtn.forEach(className => btnCountry.classList.add(className));
 
@@ -173,35 +182,52 @@ country.forEach(btnCountry => {
             }
         })
         cards.innerHTML = '';
-        console.log(cards);
-        
+
         let howCountryBtn = e.currentTarget.id;
-        switch (howCountryBtn) {
-            case 'fr': {
-                cards.innerHTML = '';
-                arrFrance.forEach(el => {
-                    createCard(cards, el.img, el.author, el.name, el.description, el.price);
-                })
-                break
-            }
-            case 'ge': {
-                cards.innerHTML = '';
-                arrGermany.forEach(el => {
-                    createCard(cards, el.img, el.author, el.name, el.description, el.price);
-                })
-                break
-            }
-            case 'en': {
-                cards.innerHTML = '';
-                arrEngland.forEach(el => {
-                    createCard(cards, el.img, el.author, el.name, el.description, el.price);
-                })
-                break
-            }
-        }
+        openCatalog(howCountryBtn)
     })
 })
 
+function styleBtn(arg) {
+    let language = document.getElementById(arg)
+
+    country.forEach(btn => {
+        activeStateBtn.forEach(el => btn.classList.remove(el));
+        stateDefaultBtn.forEach(el => btn.classList.add(el));
+        activeStateBtn.forEach(el => language.classList.add(el));
+    })
+}
+
+francePicts.addEventListener('click', () => {
+    openCatalog('fr');
+    styleBtn('fr');
+});
+
+
+function openCatalog(howBtn) {
+    cards.innerHTML = '';
+    
+    switch (howBtn) {
+        case 'fr': {
+            arrFrance.forEach(el => {
+                createCard(cards, el.img, el.author, el.name, el.description, el.price);
+            })
+            break
+        }
+        case 'ge': {
+            arrGermany.forEach(el => {
+                createCard(cards, el.img, el.author, el.name, el.description, el.price);
+            })
+            break
+        }
+        case 'en': {
+            arrEngland.forEach(el => {
+                createCard(cards, el.img, el.author, el.name, el.description, el.price);
+            })
+            break
+        }
+    }
+}
 
 
 function createCard(arg, pathImg, author, name, description, price) {
@@ -252,8 +278,28 @@ function createCard(arg, pathImg, author, name, description, price) {
 }
 
 
-productsBtn.forEach(el => {
-    el.addEventListener('click', () => {
-        products.scrollIntoView({ behavior: 'smooth' });
-    })
-})
+// footer
+
+const frCatalog = document.getElementById('frCatalog');
+const enCatalog = document.getElementById('enCatalog');
+const geCatalog = document.getElementById('geCatalog');
+
+function moveAnchor(e, country) {
+    e.preventDefault();
+
+    openCatalog(country)
+    styleBtn(country)
+
+    const targetId = e.target.getAttribute('href').substring(1);
+    const targetEl = document.getElementById(targetId);
+
+    setTimeout(() => {
+        targetEl.scrollIntoView({ behavior: 'smooth' });
+    }, 100);
+}
+
+
+frCatalog.addEventListener('click', e => moveAnchor(e, 'fr'))
+enCatalog.addEventListener('click', e => moveAnchor(e, 'en'))
+geCatalog.addEventListener('click', e => moveAnchor(e, 'ge'))
+
